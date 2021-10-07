@@ -1,6 +1,6 @@
 # ImageLandmarkMarkedTool
 
-Yeah. It's a image landmark marked tool developed by Python.
+Yeah. It's an image landmark marked tool developed by Python.
 
 ![image](https://user-images.githubusercontent.com/88467925/135992898-9d664d95-18c8-4299-8733-1d383ba9b084.png)
 
