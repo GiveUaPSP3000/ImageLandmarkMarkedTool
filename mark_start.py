@@ -7,29 +7,26 @@ from tkinter import *
 import tkinter.messagebox as messagebox
 from PIL import Image, ImageTk
 import os
+import numpy as np
 
 # 存储照片的文件名
 image_filename = 'original_images/'
 # 存储标签的文件名
 labeling_filename = 'labeling_images/'
 # 标签文件名
-label_txt = 'label.txt'
+label_txt = 'label.csv'
 # 标签点
-label_list = ['Left_Ear_(Tip)',
-              'Left_Ear_(Left Bottom)',
-              'Left_Ear_(Right Bottom)',
-              'Right_Ear_(Tip)',
-              'Right_Ear_(Left Bottom)',
-              'Right_Ear_(Right Bottom)',
-              'Left_Eye_(Left)',
+label_list = ['Left_Eye_(Left)',
+              'Left_Eye(Top)',
               'Left_Eye_(Right)',
+              'Left_Eye(Bottom)',
               'Right_Eye_(Left)',
+              'Right_Eye(Top)',
               'Right_Eye_(Right)',
-              'Nose_(Tip)',
-              'Nostril_(Left)',
-              'Nostril_(Right)',
-              'Upper_Lip',
+              'Right_Eye(Bottom)',
+              'Nose',
               'Lip_Left',
+              'Upper_Lip',
               'Lip_Right',
               'Lower_Lip']
 
@@ -108,7 +105,7 @@ class LabelTool():
         while 1:
             # 如果列表为空，则全标注完成
             if len(self.list_image) == 0:
-                messagebox.showinfo("INFO", message = "图片全已标完")
+                messagebox.showinfo("INFO", message="图片全已标完")
                 break
             else:
                 self.image_now += 1
@@ -119,10 +116,10 @@ class LabelTool():
                     # 查看label表是否存在, 不存在则加如句首
                     label_dir = self.file_dir + labeling_filename + label_txt
                     if not os.path.exists(label_dir):
-                        file = open(label_dir,'w')
+                        file = open(label_dir, 'w')
                         file.write('image_name')
                         for n in label_list:
-                            file.write('\t' + n)
+                            file.write(',' + n + '_x' + ',' + n + '_y')
                         file.write('\n')
                         file.close()
                     self._loadImage()
@@ -136,7 +133,7 @@ class LabelTool():
         :return:
         """
         or_dir = self.entry.get()
-        or_dir = or_dir.replace('\\','/')
+        or_dir = or_dir.replace('\\', '/')
         if not or_dir.endswith('/'):
             or_dir += '/'
         self.file_dir = or_dir
@@ -188,10 +185,10 @@ class LabelTool():
             del self.cycle_paint[-1]
         # 画标记点并增加一个记录，画椭圆其实是指定一个矩形，然后在起内部画内接椭圆
         if is_empty:
-            self.cycle_paint.append(self.mainPanel.create_oval(0, 0, 0, 0, fill = "red", tag="r1"))
-            self.label_record.append([-1, -1])
+            self.cycle_paint.append(self.mainPanel.create_oval(0, 0, 0, 0, fill="red", tag="r1"))
+            self.label_record.append([np.NaN, np.NaN])
         else:
-            self.cycle_paint.append(self.mainPanel.create_oval(x-10, y-10, x+10, y+10, fill = "red", tag="r1"))
+            self.cycle_paint.append(self.mainPanel.create_oval(x-10, y-10, x+10, y+10, fill="red", tag="r1"))
             self.label_record.append([x, y])
 
     def mouseClick(self, event):
@@ -249,10 +246,10 @@ class LabelTool():
             # 已完成图改名
             os.rename(self.file_dir + image_filename + self.show_name,self.file_dir + image_filename + "#" + self.show_name)
             # 标签信息写入文档
-            file =  open(self.file_dir + labeling_filename + label_txt, 'a')
+            file = open(self.file_dir + labeling_filename + label_txt, 'a')
             file.write("#"+self.show_name)
             for i in self.label_record:
-                file.write("\t"+str(i[0])+","+str(i[1]))
+                file.write(","+str(i[0])+","+str(i[1]))
             file.write("\n")
             file.close()
             # 初始化
@@ -268,4 +265,3 @@ class LabelTool():
 root = tk.Tk()
 tool = LabelTool(root)
 root.mainloop()
-
