@@ -8,7 +8,7 @@ Have you noticed the first input line? Here you need to enter the original path 
 
 ![image](https://user-images.githubusercontent.com/88467925/135995297-02ffdabc-eb36-4927-9c55-b830227890c5.png)
 
-Once you load the image, you can mark the landmark by clicking on the image. To make it easier for you to check, I'll draw a circle where you click.
+Once you load the image, you can mark the landmark by clicking on it. To make it easier for you to check, I'll draw a circle where you click.
 
 Did you notice the right box? That's the feature points you have set, and it also will remind you where to click next. Of course, you can modify the parameter "label_list" to specify the feature points you want in advance.
 
