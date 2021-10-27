@@ -52,6 +52,8 @@ class LabelTool():
         self.label_record = []
         # 标签绘画
         self.cycle_paint = []
+        # 标记点半径
+        self.r_length = 2
 
         # 设置主要框架
         self.parent = master
@@ -140,7 +142,7 @@ class LabelTool():
         or_dir += image_filename
         # 路径是否存在
         if not os.path.isdir(or_dir):
-            messagebox.showerror("Error!", message = "路径不存在")
+            messagebox.showerror("Error!", message="路径不存在")
         else:
             self.list_image = os.listdir(or_dir)
             self.image_count = len(self.list_image)
@@ -188,7 +190,7 @@ class LabelTool():
             self.cycle_paint.append(self.mainPanel.create_oval(0, 0, 0, 0, fill="red", tag="r1"))
             self.label_record.append([np.NaN, np.NaN])
         else:
-            self.cycle_paint.append(self.mainPanel.create_oval(x-10, y-10, x+10, y+10, fill="red", tag="r1"))
+            self.cycle_paint.append(self.mainPanel.create_oval(x-self.r_length, y-self.r_length, x+self.r_length, y+self.r_length, fill="red", tag="r1"))
             self.label_record.append([x, y])
 
     def mouseClick(self, event):
