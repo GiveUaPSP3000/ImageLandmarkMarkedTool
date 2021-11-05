@@ -4,7 +4,7 @@ Yeah. It's an image landmark marked tool developed by Python.
 
 ![image](https://user-images.githubusercontent.com/88467925/135992898-9d664d95-18c8-4299-8733-1d383ba9b084.png)
 
-Have you noticed the first input line? Here you need to enter the original path of the image, and the file should have two sub-files, one is called "original_images", which is used to store the set of images to be labeled, and the other is called "labeling_images", which will automatically generate a TXT file to store the coordinates you typed.
+Have you noticed the first input line? Here you need to enter the original path of the image, and the file should have two sub-files, one is called "original_images", which is used to store the set of images to be labeled, and the another one is called "labeling_images", which will automatically generate a TXT file to store the coordinates you typed.
 
 ![image](https://user-images.githubusercontent.com/88467925/135995297-02ffdabc-eb36-4927-9c55-b830227890c5.png)
 
